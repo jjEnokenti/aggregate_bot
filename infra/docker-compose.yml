@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  bot:
+    container_name: aggregate_bot
+    build:
+      context: ../
+    env_file:
+      - ../.env
+    networks:
+      - bot_network
+    depends_on:
+      load_data:
+        condition: service_started
+    command: /bin/bash/ d_entrypoint.sh
+
+  mongo_db:
+    container_name: mongo_db
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    networks:
+      - bot_network
+
+  load_data:
+    container_name: load_data
+    build:
+      context: ../
+    env_file:
+      - ../.env
+    networks:
+      - bot_network
+    depends_on:
+      mongo_db:
+        condition: service_started
+    command: bash -c "cd src/data/ && python3 loaddata.py"
+
+networks:
+  bot_network:
+    driver: bridge
