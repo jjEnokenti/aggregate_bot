@@ -3,7 +3,7 @@ import asyncio
 import bson
 
 from src.config import MONGODB_URI
-from src.db.connect import get_client
+from src.core.connect import get_client
 
 
 async def upload_data(file_name):
