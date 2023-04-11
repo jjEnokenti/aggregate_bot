@@ -2,14 +2,14 @@ import asyncio
 
 import bson
 
-from src.config import MONGODB_URI
+from src.config import MONGODB_URI, DB_NAME
 from src.core.connect import get_client
 
 
 async def upload_data(file_name):
-    client = await get_client(MONGODB_URI)
+    client = await get_client(MONGODB_URI, DB_NAME)
 
-    db = client.test_db
+    db = client
     coll = db.salaries
 
     data = get_data_from_bson(file_name)

@@ -7,12 +7,14 @@ services:
       context: ../
     env_file:
       - ../.env
+    environment:
+      MONGODB_URI: 'mongodb://mongo_db/'
     networks:
       - bot_network
     depends_on:
       load_data:
         condition: service_started
-    command: /bin/bash/ d_entrypoint.sh
+    command: python3 run.py
 
   mongo_db:
     container_name: mongo_db

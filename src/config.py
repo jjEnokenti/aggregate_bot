@@ -31,3 +31,5 @@ DATE_FORMATS = {
 MONGODB_URI = os.getenv('MONGODB_URI', 'mongodb://localhost:27017/')
 
 TOKEN = os.getenv('TOKEN')
+
+DB_NAME = os.getenv('DB_NAME', 'test_db')
