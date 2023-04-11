@@ -2,7 +2,7 @@
 
 
 #### Клонирование проекта:
-    git clone ...
+    git clone https://github.com/jjEnokenti/aggregate_bot.git
 
 #### Запуск:
     cd infra
