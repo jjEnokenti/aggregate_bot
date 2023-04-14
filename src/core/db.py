@@ -49,9 +49,9 @@ def get_pipeline(group_type: str, dt_from: str, dt_upto: str) -> list[dict]:
     return pipeline
 
 
-async def create_docs(group_type, dt_from, dt_upto):
-    db = await get_client(MONGODB_URI, DB_NAME)
-    salaries = db.salaries
+async def create_docs(db_conn, group_type, dt_from, dt_upto):
+
+    salaries = db_conn.salaries
 
     start = dt_from
     end_date = dt_upto
@@ -75,7 +75,7 @@ async def create_docs(group_type, dt_from, dt_upto):
 
 async def get_payments(group_type, dt_from, dt_upto):
     db = await get_client(MONGODB_URI, DB_NAME)
-    await create_docs(group_type, dt_from, dt_upto)
+    await create_docs(db, group_type, dt_from, dt_upto)
 
     salaries = db.salaries
     pipeline = get_pipeline(group_type, dt_from, dt_upto)
