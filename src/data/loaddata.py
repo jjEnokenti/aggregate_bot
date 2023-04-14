@@ -1,6 +1,7 @@
 import asyncio
 
 import bson
+import pymongo
 
 from src.config import MONGODB_URI, DB_NAME
 from src.core.connect import get_client
@@ -24,4 +25,8 @@ def get_data_from_bson(file_name):
 
 if __name__ == '__main__':
     bson_file_name = 'sample_collection.bson'
-    asyncio.run(upload_data(bson_file_name))
+    try:
+    	asyncio.run(upload_data(bson_file_name))
+    except pymongo.errors.BulkWriteError:
+    	pass
+
